@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+}
+
+article {
+    border: 2px solid black;
+}
+
+main {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.ads_wrapper {
+    border: 2px solid black;
+    float: right;
+    width: 200px;
+    background-color: lightgray;
+}
+
+footer {
+    border: 2px solid black;
+}
+
+.contents_wrapper {
+    border: 2px solid black;
+    float: left;
+    width: 200px;
+    background-color: lightgray;
+}
