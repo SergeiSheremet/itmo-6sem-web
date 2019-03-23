@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 article {
     background-color: #f4f4f4;
     border: 1px dashed #333;
@@ -19,7 +22,6 @@ aside {
 }
 
 .ads-wrapper {
-    padding-left: 5px;
     background-color: #f4f4f4;
     border: 1px dashed #333;
     float: right;
@@ -31,7 +33,7 @@ aside {
     margin-left: calc(25% - 210px);
 }
 
-@media (max-width: 830px) {
+@media (max-width: 1024px) {
     .contents-wrapper, .ads-wrapper {
         float: none;
         margin: 0 auto;
