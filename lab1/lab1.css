@@ -1,30 +1,43 @@
-* {
-    box-sizing: border-box;
-}
-
 article {
-    border: 2px solid black;
+    background-color: #f4f4f4;
+    border: 1px dashed #333;
+    margin-bottom: 5px;
 }
 
-main {
+main, footer {
     width: 50%;
     margin: 0 auto;
 }
 
-.ads_wrapper {
-    border: 2px solid black;
+h1 {
+    text-align: center;
+}
+
+aside {
+    padding: 0%;
+    width: 200px;
+}
+
+.ads-wrapper {
+    padding-left: 5px;
+    background-color: #f4f4f4;
+    border: 1px dashed #333;
     float: right;
-    width: 200px;
-    background-color: lightgray;
+    margin-right: calc(25% - 210px);
 }
 
-footer {
-    border: 2px solid black;
-}
-
-.contents_wrapper {
-    border: 2px solid black;
+.contents-wrapper {
     float: left;
-    width: 200px;
-    background-color: lightgray;
+    margin-left: calc(25% - 210px);
+}
+
+@media (max-width: 830px) {
+    .contents-wrapper, .ads-wrapper {
+        float: none;
+        margin: 0 auto;
+        width: 100%;
+    }
+    main, footer {
+        width: 100%;
+    }
 }

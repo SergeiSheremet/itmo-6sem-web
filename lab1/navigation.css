@@ -1,18 +1,18 @@
 .navigation {
-    margin-left: 0px;
-    padding-left: 0px;
-    list-style: none;
+    display: flex;
+    justify-content: center;   
+    padding: 0px;
 }
 
 .navigation li { 
-    display: inline; 
+    display: inline;
 }
 
 .navigation a {
     display: inline-block;
     width: 5em;
     padding: 10px;
-    margin: 0 5px;
+    margin: 0 2px;
     background-color: #f4f4f4;
     border: 1px dashed #333;
     text-decoration: none;
