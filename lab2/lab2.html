@@ -6,7 +6,8 @@
     <title>FutureAvia</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+        integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -39,46 +40,48 @@
                 <button type="submit"></button>
             </form>
         </div>
-        <div class="row d-flex justify-content-center presenter">
-            <div class="presenter-text d-flex flex-column bd-highlight mb-3"> <!--why it doesn't work-->
+        <div class="row d-flex justify-content-center">
+            <div class="presenter-text d-flex flex-column justify-content-around">
                 <div>
                     <h3>Meet tomorrow with</h3>
-                    <h2 class="company-name">FutureAvia</h2></div>
+                    <h2 class="big-company-name">FutureAvia</h2></div>
                 <p class="text-under-headline">
                     Airplanes have long been a modern day. But what lies in the future? Who knows...<br />
                     One thing we sure that our service is up-to-date even by future standards.
                 </p>
-                <p>So, would you like to join us?</p>
-                <div class="d-flex justify-content-start align-items-center">
-                    <button class="btn btn-outline-light" type="submit">Yes, sure</button>
-                    <p class="button-splitter">or</p>
-                    <a class="btn btn-outline-light" href="#main" role="button">I want to know more</a>
+                <div>
+                    <p>So, would you like to join us?</p>
+                    <div class="d-flex justify-content-start align-items-center">
+                        <button class="btn btn-outline-light" type="submit">Yes, sure</button>
+                        <p class="button-splitter">or</p>
+                        <a class="btn btn-outline-light" href="#main-headline" role="button">I want to know more</a>
+                    </div>
                 </div>
             </div>
             <div>
-                <img src="img/plane.png" alt="logo"/>
+                <img id="big-img" src="img/plane.png" alt="logo"/>
             </div>
         </div>
     </header>
     <main>
-        <h1 id="main">Why FutureAvia?</h1>
+        <h1 id="main-headline">Why FutureAvia?</h1>
         <div class="container">
             <div class="row">
-                <div class="col">
+                <div class="col-sm-4">
                     <div class="d-flex">
                         <i class="fas fa-dollar-sign"></i>
                         <h6>Saves your money</h6>
                     </div>
                     <p>Our company provides the lowest prices on most tourist destinations.</p>
                 </div>
-                <div class="col">
+                <div class="col-sm-4">
                     <div class="d-flex">
                         <i class="fas fa-plane"></i>
                         <h6>Only newest planes</h6>
                     </div>
                     <p>We are constantly buying new aircraft for the next level of comfort and entertainment on board.</p>
                 </div>
-                <div class="col">
+                <div class="col-sm-4">
                     <div class="d-flex"> 
                         <i class="far fa-handshake"></i>
                         <h6>Loyalty system</h6>
@@ -86,21 +89,21 @@
                     <p>We are friends for our clients. And, as befits a good friend, we give gifts.</p>
                 </div>
                 <div class="w-100"></div>
-                <div class="col">
+                <div class="col-sm-4">
                     <div class="d-flex">
                         <i class="fas fa-user-tie"></i>
                         <h6>Excellent service</h6>
                     </div>
                     <p>FutureAvia hires only a professionals in their business. They are at your service at any time.</p>
                 </div>
-                <div class="col">
+                <div class="col-sm-4">
                     <div class="d-flex">
                         <i class="fas fa-globe-americas"></i>
                         <h6>Global representation</h6>
                     </div>
                     <p>We love to be in diffirent places. And we will help you to get in every place you want to.</p>
                 </div>
-                <div class="col">
+                <div class="col-sm-4">
                     <div class="d-flex">
                         <i class="fas fa-laptop"></i>
                         <h6>Automated process</h6>
@@ -109,12 +112,47 @@
                 </div>
             </div>
         </div>
-        <div class="pink">
-
+        <div class="container-fluid pink">
+            <div class="row justify-content-start">
+                <div id="img-wrapper" class="col-sm-6">
+                    <img id="side-img" src="img/retroplane.png" alt="retroplane"/>
+                </div>
+                <div class="col-sm-5 d-flex flex-column justify-content-around">
+                    <div>
+                        <h3>A journey with</h3>
+                        <p class="big-company-name">FutureAvia</p>
+                    </div>
+                    <div class="d-flex justify-content-start">
+                        <button class="btn btn-outline-light" type="submit">Now I'm ready!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-between">
+                <div>
+                    <h3>Please, send us your feedback</h3>
+                    <p>
+                        It's impotant for us to know what do you think about our company.<br/>
+                        Feel free to leave your thoughts about our service.
+                    </p>
+                </div>
+                <div>
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <textarea textarea class="form-control" id="feedback-message" placeholder="Enter your feedback" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </main>
-    <footer>
-
-    </footer>
 </body>
 </html>
