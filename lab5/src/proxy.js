@@ -3,13 +3,13 @@ import axios from "axios";
 
 const url = "http://localhost:3000/api/documents/";
 
-class Proxy {
-  static insert(title, body) {
+export class ProxyService {
+  static insert(title, content) {
     return axios.post(
       `${url}create`,
       {
         title: title,
-        body: body
+        content: content
       },
       { 
         headers: { "Content-Type": "application/json" } 
@@ -17,7 +17,7 @@ class Proxy {
     );
   }
 
-  static get() {
+  static index() {
     return axios.get(url);
   }
 
@@ -38,5 +38,3 @@ class Proxy {
     );
   }
 }
-
-export default Proxy;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class = "preview-md" v-html="compiledMarkdown"></div>
+    <!-- <div class = "preview-md" v-html="compiledMarkdown"></div> -->
   </div>
 </template>
 
@@ -31,5 +31,6 @@ export default {
   font-family: "Monaco", courier, monospace;
   padding: 20px;
   text-align: start;
+  word-wrap: break-word;
 }
 </style>

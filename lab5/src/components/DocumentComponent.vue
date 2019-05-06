@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Editor :doc="currentDoc" v-on:render="rerenderList" v-on:change="onChange"/>
+    <Editor :doc="currentDoc" v-on:render="renderList" v-on:change="onChange"/>
     <p>
       <Preview :text="currentDoc.body"/>
     </p>
@@ -19,52 +19,59 @@
 <script>
 import Editor from "./Editor";
 import Preview from "./Preview";
-import Proxy from "../proxy";
+const {ProxyService} = require('../proxy.js');
+
 export default {
   name: "DocumentComponent",
   data() {
     return {
       currentDoc: {
-        body: "",
-        title: ""
+        title: "говнно",
+        content: "пис оф щит"
       },
       documents: []
     };
   },
-  async created() {
-    var res = await Proxy.get();
-    this.documents = res.data;
+  mounted() {
+    var res = {};
+    const thisRef = this;
+    ProxyService.index().then(
+      function (result) {
+        res = result;
+      }
+    ).then(function(){
+    thisRef.documents = res.data;
     if (res.data.length > 0) {
-      this.currentDoc = res.data[0];
-    }
+      thisRef.currentDoc = res.data[0];
+    }});
   },
   methods: {
     select(document) {
       this.currentDoc = document;
     },
-    async onChange() {
+    onChange() {
       if (this.currentDoc._id) {
-        await Proxy.update(
+        ProxyService.update(
           this.currentDoc._id,
           this.currentDoc.title,
           this.currentDoc.body
         );
       } else {
-        var res = await Proxy.insert(
+        var res = ProxyService.insert(
           this.currentDoc.title,
           this.currentDoc.body
         );
         this.currentDoc._id = res.body;
       }
-      this.rerenderList();
+      this.renderList();
     },
-    async add() {
-      var res = await Proxy.insert("New Title", "New text");
+    add() {
+      var res = ProxyService.insert("New Title", "New text");
       this.currentDoc = res.data;
-      this.rerenderList();
+      this.renderList();
     },
-    async rerenderList() {
-      var res = await Proxy.get();
+    renderList() {
+      var res = ProxyService.index();
       this.documents = res.data;
     }
   },

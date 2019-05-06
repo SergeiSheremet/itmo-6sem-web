@@ -3,7 +3,10 @@
     <h1>
       <input v-model="doc.title" @change="change">
     </h1>
-    <textarea v-model="doc.body" @change="change"></textarea>
+    <div class="input-output-wrapper">
+      <textarea v-model="doc.content" @change="change"></textarea>
+      <div class = "preview-md" v-html="compiledMarkdown"></div>
+    </div>
     <br>
     <label></label>
     <button @click="remove(doc.id)">Remove</button>
@@ -11,24 +14,25 @@
 </template>
 
 <script>
-import Proxy from "../proxy";
+import ProxyService from "../proxy";
+import marked from "marked";
 export default {
   name: "Editor",
   props: {
-    doc: {
-      default: {
-        title: "",
-        text: ""
-      }
-    }
+    doc: Object
   },
   methods: {
     async remove(id) {
-      await Proxy.delete(id);
+      await ProxyService.delete(id);
       this.$emit("render");
     },
     change() {
       this.$emit("change");
+    }
+  },
+  computed: {
+    compiledMarkdown() {
+      return marked(this.doc.content, { sanitize: true });
     }
   }
 };
@@ -36,7 +40,7 @@ export default {
 
 <style scoped>
 textarea {
-  width: 98%;
+  width: 45%;
   border: none;
   border-right: 1px solid #ccc;
   /* resize: none; */
@@ -48,5 +52,8 @@ textarea {
 }
 label {
   width: 49%;
+}
+.input-output-wreapper {
+  display: flex;
 }
 </style>

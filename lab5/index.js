@@ -43,6 +43,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 api = {}
 
 api.create = () => (req, res) => {
+    console.log("c");
     if (!req.body.title || !req.body.content)
         res.json({ success: false, message: 'Please, pass a title and content.' });
 
@@ -60,6 +61,8 @@ api.create = () => (req, res) => {
 }
 
 api.index = () => (req, res) => {
+    console.log("i");
+
     Document.find({}, (error, docs) => {
         if (error)
             throw error;
@@ -69,7 +72,9 @@ api.index = () => (req, res) => {
 }
 
 api.read = () => (req, res) => {  
-    if (!req.params.id) 
+    console.log("r");
+
+    if (!req.params.id || !mongoose.Types.ObjectId.isValid(req.params.id)) 
         res.json({ success: false, message: 'Please, pass an identifier.' });
 
     Document.findById(req.params.id, (error, doc) => {
@@ -81,7 +86,9 @@ api.read = () => (req, res) => {
 }
 
 api.update = () => (req, res) => {
-    if (!req.params.id || !req.body.content)
+    console.log("u");
+
+    if (!req.params.id || !mongoose.Types.ObjectId.isValid(req.params.id) || !req.body.content)
         res.json({ success: false, message: 'Please, pass an identifier and content.' });
 
     const doc = new Document({
