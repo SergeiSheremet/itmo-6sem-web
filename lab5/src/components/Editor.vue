@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>
+    <h2>
       <input v-model="doc.title" @change="change">
-    </h1>
+    </h2>
     <div class="input-output-wrapper">
       <textarea v-model="doc.content" @change="change"></textarea>
-      <div class = "preview-md" v-html="compiledMarkdown"></div>
+      <div class="preview-md" v-html="compiledMarkdown"></div>
     </div>
     <br>
     <label></label>
@@ -40,20 +40,32 @@ export default {
 
 <style scoped>
 textarea {
-  width: 45%;
   border: none;
   border-right: 1px solid #ccc;
-  /* resize: none; */
   outline: none;
   background-color: #f6f6f6;
   font-size: 14px;
   font-family: "Monaco", courier, monospace;
   padding: 20px;
+  display: block;
+  resize: none;
 }
 label {
   width: 49%;
 }
-.input-output-wreapper {
-  display: flex;
+.input-output-wrapper {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+}
+.preview-md {
+  border: none;
+  border-right: 1px solid #ccc;
+  background-color: #f6f6f6;
+  font-size: 14px;
+  font-family: "Monaco", courier, monospace;
+  padding: 20px;
+  text-align: start;
+  word-wrap: break-word;
 }
 </style>
