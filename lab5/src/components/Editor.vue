@@ -2,31 +2,49 @@
   <div>
     <h2>
       <input v-model="doc.title" @change="change">
+      <button @click="add(doc)">Save</button>
     </h2>
     <div class="input-output-wrapper">
       <textarea v-model="doc.content" @change="change"></textarea>
       <div class="preview-md" v-html="compiledMarkdown"></div>
     </div>
     <br>
-    <label></label>
-    <button @click="remove(doc.id)">Remove</button>
+    <!-- <button @click="remove(doc.id)">Remove</button> -->
   </div>
 </template>
 
 <script>
-import ProxyService from "../proxy";
+const {ProxyService} = require('../proxy.js');
 import marked from "marked";
 export default {
   name: "Editor",
   props: {
     doc: Object
   },
+  mounted() {
+    var res = {};
+    const thisRef = this;
+    ProxyService.index().then(
+      function (result) {
+        res = result;
+      }
+    ).then(function(){
+    thisRef.documents = res.data;
+    if (res.data.length > 0) {
+      thisRef.currentDoc = res.data[0];
+    }});
+  },
   methods: {
-    async remove(id) {
-      await ProxyService.delete(id);
+    remove: function(id) {
+      ProxyService.delete(id);
       this.$emit("render");
     },
-    change() {
+    add: function() {
+      var res = ProxyService.insert("New Title", "New text");
+      this.currentDoc = res.data;
+      this.renderList();
+    },
+    change: function() {
       this.$emit("change");
     }
   },

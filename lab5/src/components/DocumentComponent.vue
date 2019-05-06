@@ -1,18 +1,14 @@
 <template>
   <div>
     <Editor :doc="currentDoc" v-on:render="renderList" v-on:change="onChange"/>
-    <p>
-      <Preview :text="currentDoc.body"/>
-    </p>
     <h1>Documents</h1>
     <div>
       <div
         v-for="document in documents"
         v-bind:key="document._id"
-        @click="select(document)"
-      >{{document.title}}</div>
+      ><button @click="select(document)">{{document.title}}</button> </div>
     </div>
-    <button @click="add(doc)">Save</button>
+    
   </div>
 </template>
 
@@ -26,8 +22,8 @@ export default {
   data() {
     return {
       currentDoc: {
-        title: "говнно",
-        content: "пис оф щит"
+        title: "new title",
+        content: "# new document"
       },
       documents: []
     };
