@@ -13,30 +13,19 @@ mongoose
     })
     .then(
         () => {
-            // eslint-disable-next-line no-console
             console.info("Connected")
         },
         error => {
-            // eslint-disable-next-line no-console
             console.info("MongoDB connection error" + error)
         });
 
-const Schema = mongoose.Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    content: {
-        type: String,
-        required: true
-    },
-    modified: {
-        type: Date,
-        default: Date.now
-    }
+
+const DocumentSchema = mongoose.Schema({
+    title: String,
+    content: String
 });
           
-mongoose.model('Document', Schema);
+const Document = mongoose.model('Document', DocumentSchema);
 
 //middlewares
 app.use(function (req, res, next) {
@@ -51,9 +40,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //business logic
-api.create = (Document) => (req, res) => {
-    console.log('creating doc...');
+api = {}
 
+api.create = () => (req, res) => {
     if (!req.body.title || !req.body.content)
         res.json({ success: false, message: 'Please, pass a title and content.' });
 
@@ -61,7 +50,7 @@ api.create = (Document) => (req, res) => {
         title: req.body.title,
         content: req.body.content
     });
-    
+
     doc.save(error => {
         if (error)
             throw error;
@@ -70,7 +59,7 @@ api.create = (Document) => (req, res) => {
     })
 }
 
-api.index = (Document) => (req, res) => {
+api.index = () => (req, res) => {
     Document.find({}, (error, docs) => {
         if (error)
             throw error;
@@ -79,11 +68,11 @@ api.index = (Document) => (req, res) => {
     })
 }
 
-api.read = (Document) => (req, res) => {  
-    if (!req.body.id) 
+api.read = () => (req, res) => {  
+    if (!req.params.id) 
         res.json({ success: false, message: 'Please, pass an identifier.' });
 
-    Document.findById(req.body.id, (error, doc) => {
+    Document.findById(req.params.id, (error, doc) => {
         if (error)
             throw error;
 
@@ -91,15 +80,16 @@ api.read = (Document) => (req, res) => {
     })
 }
 
-api.update = (Document) => (req, res) => {
-    if (!req.body.id || !req.body.content)
+api.update = () => (req, res) => {
+    if (!req.params.id || !req.body.content)
         res.json({ success: false, message: 'Please, pass an identifier and content.' });
 
     const doc = new Document({
+        _id: req.params.id,
         content: req.body.content
     });
     
-    doc.findByIdAndUpdate(req.body.id, doc, (error, doc) => {
+    Document.findByIdAndUpdate(req.params.id, doc, (error, doc) => {
         if (error)
             throw error;
 
@@ -108,20 +98,17 @@ api.update = (Document) => (req, res) => {
 }
 
 //routing
-app.get('*', (req, res) =>
-    response.status(404).sendStatus('404'));
-
 app.route('/api/documents/add')
-    .post(api.create(models.Document));
+    .post(api.create());
     
 app.route('/api/documents')
-    .get(api.index(models.Document));
+    .get(api.index());
 
-app.route('/api/documents')
-    .post(api.read(models.Document));
+app.route('/api/documents/:id')
+    .get(api.read());
     
-app.route('/api/documents/update')
-    .put(api.signup(models.Document));
+app.route('/api/documents/update/:id')
+    .put(api.update());
 
 // eslint-disable-next-line no-console
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
