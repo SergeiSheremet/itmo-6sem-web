@@ -2,7 +2,8 @@
   <div>
     <h2>
       <input v-model="doc.title" @change="change">
-      <button @click="add(doc)">Save</button>
+      <button @click="save">Save</button>
+      <button @click="create">Create</button>
     </h2>
     <div class="input-output-wrapper">
       <textarea v-model="doc.content" @change="change"></textarea>
@@ -19,29 +20,26 @@ import marked from "marked";
 export default {
   name: "Editor",
   props: {
-    doc: Object
-  },
-  mounted() {
-    var res = {};
-    const thisRef = this;
-    ProxyService.index().then(
-      function (result) {
-        res = result;
-      }
-    ).then(function(){
-    thisRef.documents = res.data;
-    if (res.data.length > 0) {
-      thisRef.currentDoc = res.data[0];
-    }});
+    doc: {
+      title: "new title",
+      content: "# new document"
+    }
   },
   methods: {
     remove: function(id) {
       ProxyService.delete(id);
       this.$emit("render");
     },
-    add: function() {
-      var res = ProxyService.insert("New Title", "New text");
-      this.currentDoc = res.data;
+    create: function() {
+      this.doc = new Object({
+        title: "New",
+        content: "# New"
+      })
+      this.renderList();
+    },
+    save: function() {
+      var res = ProxyService.insert(doc.title, doc.content);
+      //this.currentDoc = res.data;
       this.renderList();
     },
     change: function() {

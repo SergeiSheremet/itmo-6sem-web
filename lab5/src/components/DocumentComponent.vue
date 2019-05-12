@@ -14,7 +14,6 @@
 
 <script>
 import Editor from "./Editor";
-import Preview from "./Preview";
 const {ProxyService} = require('../proxy.js');
 
 export default {
@@ -72,8 +71,7 @@ export default {
     }
   },
   components: {
-    Editor,
-    Preview
+    Editor
   }
 };
 </script>

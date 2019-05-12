@@ -19,6 +19,7 @@ mongoose
             console.info("MongoDB connection error" + error)
         });
 
+mongoose.set('useFindAndModify', false);
 
 const DocumentSchema = mongoose.Schema({
     title: String,
@@ -105,7 +106,7 @@ api.update = () => (req, res) => {
 }
 
 //routing
-app.route('/api/documents/add')
+app.route('/api/documents/create')
     .post(api.create());
     
 app.route('/api/documents')
